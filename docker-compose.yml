@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+
+  # =========================
+  # Redis
+  # =========================
+  redis:
+    image: redis:alpine
+    container_name: redis_aula
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass root123 --appendonly yes
+    volumes:
+      - redis-data:/data
+
+  # =========================
+  # PostgreSQL
+  # =========================
+  postgres:
+    image: postgres:latest
+    container_name: postgres_dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dev_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./Dados:/var/lib/postgresql/18/docker
+
+  # =========================
+  # pgAdmin
+  # =========================
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_dev
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+
+# =========================
+# Volumes
+# =========================
+volumes:
+  redis-data:

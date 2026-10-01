@@ -71,14 +71,3 @@ def redis_hdel(hash_name, key):
     else:
         print(f"Hash ou key não existe: {key}")
 
-    
-#redis_set("chave_2", "valor_2")
-#redis_get("chave_2")
-#redis_delete("chave_2")
-redis_hget("meuHash", "nome")
-#redis_hget("meuHash", "idade")
-#redis_hget("meuHash", "cidade")
-#redis_hset("meuHash", "nome", "Pedro")
-#redis_hset("meuHash", "idade", 20)
-#redis_hset("nossoHash", "cidade", "Fortaleza")
-#redis_hdel("nossoHash", "cidade")
